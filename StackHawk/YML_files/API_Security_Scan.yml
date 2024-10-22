@@ -1,1 +1,32 @@
+# olde version of yml
+app:
+  # ID of an Application in your StackHawk account
+  applicationId: de112c7d-a62c-44d1-a007-07b3dd7c5b1c
+  # Environment name for the scan
+  env: Development
+  # URL to a running instance of your application
+  host: https://dlq-to-mq-contacts-prod.lipapis.com
+  openApiConf:
+    filePath: api.json
+  authentication:
+    loggedInIndicator: "HTTP.*2[0-9][0-9]\\s*O[kK](\\s*)|HTTP.*3[0-9][0-9].*"
+    loggedOutIndicator: "HTTP.*4[0-9][0-9](\\s*)Unauthorized.*" 
+    oauth:
+      parameters:
+        tokenEndpoint: https://lincolnrtd.okta.com/oauth2/aus1okcan4golyKR71d8/v1/token
+        grantType: client_credentials
+        scope: READ 
+      credentials:
+        clientId: 0oa1pdtml6oaiiyNt1d8 #application credentials
+        clientSecret: "t03sJCkWRUQzQMlgGQi6nMhlsho3UcVB2thzKn77JWHS8fDYljdg4Y2fnHPGuwIp" #application credentials
+    tokenExtraction:
+      type: TOKEN_PATH
+      value: access_token
+    tokenAuthorization:
+      type: HEADER
+      value: Authorization
+      tokenType: Bearer
+    testPath:
+      path: /v1/api/healthcheck
+      success: '.*200.*'
 
